@@ -4,7 +4,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 const val BASE_URL = "https://api.weatherapi.com/v1/"
-
 object ApiService {
     private var service: WeatherApiService? = null
 

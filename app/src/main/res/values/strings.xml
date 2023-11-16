@@ -2,5 +2,22 @@
     <string name="app_name">WeatherAppMy</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="days">Days</string>
+    <string name="days_tab">Days</string>
+    <string name="search_button">Search button</string>
+    <string name="sync_button">Sync button</string>
+    <string name="test_time">20/07/2022 13:00</string>
+    <string name="test_city">Kyiv</string>
+    <string name="text_min_max_temp">34ºC/12ºC</string>
+    <string name="test_condtion">Sunny</string>
+    <string name="test_temp">20ºС</string>
+    <string name="hours_tab">Hours</string>
+    <string name="test_date_and_time">Monday 12.12.2022</string>
+    <string name="enable_location">Enable location?</string>
+    <string name="location_disabled_do_you_want_to_enable_location">Location disabled. Do you want to enable location?</string>
+    <string name="ok">OK</string>
+    <string name="no">NO</string>
+    <string name="city_name">City name:</string>
+    <string name="error">Error</string>
+    <string name="close">Close</string>
+    <integer name="NUMBER_OF_DAYS">7</integer>
 </resources>

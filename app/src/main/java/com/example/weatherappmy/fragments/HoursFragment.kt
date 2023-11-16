@@ -10,10 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.weatherappmy.MainViewModel
 import com.example.weatherappmy.adapters.HoursAdapter
 import com.example.weatherappmy.databinding.FragmentHoursBinding
-import com.example.weatherappmy.model.WeatherHour
-import com.example.weatherappmy.model.WeatherResponse
-import org.json.JSONArray
-import org.json.JSONObject
 
 
 class HoursFragment : Fragment() {
@@ -34,7 +30,7 @@ class HoursFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initRecycleView()
         model.response.observe(viewLifecycleOwner) {
-            adapter.submitList(getHoursList(it))
+            adapter.submitList(it.forecast.forecastday[0].hour)
         }
     }
 
@@ -45,20 +41,7 @@ class HoursFragment : Fragment() {
 
     }
 
-    private fun getHoursList(weatherItem: WeatherResponse): List<WeatherHour> {
-        val list = ArrayList<WeatherHour>();
-        for (i in 0 until weatherItem.forecast.forecastday.size) {
-            val item = WeatherHour(
-                weatherItem.forecast.forecastday[i].hour[i].time,
-                weatherItem.forecast.forecastday[i].hour[i].condition,
-                weatherItem.forecast.forecastday[i].hour[i].temp_c)
-            list.add(item)
-        }
-        return list
-    }
-
     companion object {
-
         @JvmStatic
         fun newInstance() = HoursFragment()
     }

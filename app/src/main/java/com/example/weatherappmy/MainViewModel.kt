@@ -3,8 +3,6 @@ package com.example.weatherappmy
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.weatherappmy.model.WeatherForecastDay
-import com.example.weatherappmy.model.WeatherHour
 import com.example.weatherappmy.model.WeatherResponse
 import com.example.weatherappmy.network.RetrofitImpl
 import kotlinx.coroutines.CoroutineScope
@@ -29,7 +27,5 @@ class MainViewModel : ViewModel() {
                 _error.value = "Exception: ${e.message}"
             }
         }
-
     }
-
 }

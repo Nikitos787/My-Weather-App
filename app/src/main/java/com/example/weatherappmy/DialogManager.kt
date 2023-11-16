@@ -8,13 +8,13 @@ object DialogManager {
     fun locationSettingDialog(context: Context, listener: Listener) {
         val builder = AlertDialog.Builder(context)
         val dialog = builder.create()
-        dialog.setTitle("Enable location?")
-        dialog.setMessage("Location disabled. Do you want to enable location?")
-        dialog.setButton(AlertDialog.BUTTON_POSITIVE, "Ok") { _, _ ->
+        dialog.setTitle(context.getString(R.string.enable_location))
+        dialog.setMessage(context.getString(R.string.location_disabled_do_you_want_to_enable_location))
+        dialog.setButton(AlertDialog.BUTTON_POSITIVE, context.getString(R.string.ok)) { _, _ ->
             listener.onClick(null)
             dialog.dismiss()
         }
-        dialog.setButton(AlertDialog.BUTTON_NEGATIVE, "No") { _, _ ->
+        dialog.setButton(AlertDialog.BUTTON_NEGATIVE, context.getString(R.string.no)) { _, _ ->
             dialog.dismiss()
         }
         dialog.show()
@@ -25,13 +25,13 @@ object DialogManager {
         val editTextForCityName =EditText(context)
         builder.setView(editTextForCityName)
         val dialog = builder.create()
-        dialog.setTitle("City name:")
+        dialog.setTitle(context.getString(R.string.city_name))
 
-        dialog.setButton(AlertDialog.BUTTON_POSITIVE, "Ok") { _, _ ->
+        dialog.setButton(AlertDialog.BUTTON_POSITIVE, context.resources.getString(R.string.ok)) { _, _ ->
             listener.onClick(editTextForCityName.text.toString())
             dialog.dismiss()
         }
-        dialog.setButton(AlertDialog.BUTTON_NEGATIVE, "No") { _, _ ->
+        dialog.setButton(AlertDialog.BUTTON_NEGATIVE, context.resources.getString(R.string.no)) { _, _ ->
             dialog.dismiss()
         }
         dialog.show()
@@ -39,10 +39,10 @@ object DialogManager {
 
     fun errorMessage(context: Context, e: String) {
         val dialog = AlertDialog.Builder(context)
-            .setTitle("Error")
+            .setTitle(context.getString(R.string.error))
             .setMessage(e)
             .setPositiveButton(
-                "Close") { dialog, _ ->
+                context.getString(R.string.close)) { dialog, _ ->
                 dialog.dismiss()
             }
             .create()

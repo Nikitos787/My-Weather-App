@@ -15,6 +15,5 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction()
             .replace(R.id.placeHolder, MainFragment.newInstance())
             .commit()
-
         }
 }

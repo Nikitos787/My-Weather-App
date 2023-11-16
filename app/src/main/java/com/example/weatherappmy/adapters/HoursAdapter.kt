@@ -13,21 +13,19 @@ import com.squareup.picasso.Picasso
 
 class HoursAdapter() : ListAdapter<WeatherHour, HoursAdapter.Holder>(Comparator()) {
 
-    class Holder(view: View): RecyclerView.ViewHolder(view) {
-        val binding = ListItemBinding.bind(view)
-        var itemTemp: WeatherHour? = null
+    class Holder(view: View) : RecyclerView.ViewHolder(view) {
+        private val binding = ListItemBinding.bind(view)
 
         fun bind(item: WeatherHour) = with(binding) {
             val temperatureFormatted = "${item.temp_c.toFloat().toInt()} ℃"
-            itemTemp = item
             textForDateItem.text = item.time
-            textConditionItem. text = item.condition.text
+            textConditionItem.text = item.condition.text
             textTempItem.text = temperatureFormatted
             Picasso.get().load("https:" + item.condition.icon).into(imageConditionOfItem)
         }
     }
 
-    class Comparator: DiffUtil.ItemCallback<WeatherHour>() {
+    class Comparator : DiffUtil.ItemCallback<WeatherHour>() {
         override fun areItemsTheSame(oldItem: WeatherHour, newItem: WeatherHour): Boolean {
             return oldItem == newItem
         }
