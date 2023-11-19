@@ -1,3 +1,8 @@
 package com.example.weatherappmy.model
 
-data class WeatherForecast(val forecastday: List<WeatherForecastDay>)
+import androidx.room.Embedded
+import androidx.room.Entity
+
+data class WeatherForecast(
+    val forecastday: List<WeatherForecastDay>
+)

@@ -19,9 +19,13 @@ import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.activityViewModels
 import com.example.weatherappmy.DialogManager
 import com.example.weatherappmy.MainViewModel
+import com.example.weatherappmy.MainViewModelFactory
 import com.example.weatherappmy.adapters.ViewPagerAdapter
+import com.example.weatherappmy.database.dao.WeatherDatabase
+import com.example.weatherappmy.database.service.WeatherService
 import com.example.weatherappmy.databinding.FragmentMainBinding
 import com.example.weatherappmy.isPermissionGranted
+import com.example.weatherappmy.network.RetrofitImpl
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
@@ -36,7 +40,14 @@ class MainFragment : Fragment() {
     private val tabList = listOf("Hours", "Days")
     private lateinit var pLauncher: ActivityResultLauncher<String> // ask gps
     private lateinit var binding: FragmentMainBinding
-    private val model: MainViewModel by activityViewModels()
+    private val model: MainViewModel by activityViewModels {
+        MainViewModelFactory(
+            weatherService = WeatherService(
+                WeatherDatabase.getDatabase(activity as Context),
+                RetrofitImpl()
+            )
+        )
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -64,14 +75,22 @@ class MainFragment : Fragment() {
         model.response.observe(viewLifecycleOwner) {
             val maxMinTemp =
                 "${
-                    it.forecast.forecastday[0].day.maxtemp_c.toFloat().toInt()
-                }℃ / ${it.forecast.forecastday[0].day.mintemp_c.toFloat().toInt()}℃"
-            val currentTemperatureFormatted = "${it.current.temp_c.toFloat().toInt()} ℃"
-            textViewDate.text = it.location.localtime
-            textViewCity.text = it.location.name
-            textViewCondition.text = it.current.condition.text
+                    it?.forecast?.forecastday?.get(0)?.day?.maxtemp_c?.toFloat()?.toInt()
+                }℃ / ${it?.forecast?.forecastday?.get(0)?.day?.mintemp_c?.toFloat()?.toInt()}℃"
+            val currentTemperatureFormatted = "${it?.current?.temp_c?.toFloat()?.toInt()} ℃"
+            if (it != null) {
+                textViewDate.text = it.location.localtime
+            }
+            if (it != null) {
+                textViewCity.text = it.location.name
+            }
+            if (it != null) {
+                textViewCondition.text = it.current.condition.text
+            }
             textViewCurrentTemeprature.text = currentTemperatureFormatted.ifEmpty { maxMinTemp }
-            Picasso.get().load("https:" + it.current.condition.icon).into(imageViewWeather)
+            if (it != null) {
+                Picasso.get().load("https:" + it.current.condition.icon).into(imageViewWeather)
+            }
         }
     }
 
@@ -89,7 +108,7 @@ class MainFragment : Fragment() {
         imageButtonSearch.setOnClickListener {
             DialogManager.searchByName(requireContext(), object : DialogManager.Listener {
                 override fun onClick(name: String?) {
-                    name?.let { it1 -> model.updateWeatherData(it1) }
+                    name?.let { it1 -> model.updateWeather(it1) }
                 }
             })
         }
@@ -132,7 +151,7 @@ class MainFragment : Fragment() {
         }
         fusedLocationClient.getCurrentLocation(Priority.PRIORITY_HIGH_ACCURACY, token.token)
             .addOnCompleteListener {
-                model.updateWeatherData("${it.result.latitude},${it.result.longitude}")
+                model.updateWeather("${it.result.latitude},${it.result.longitude}")
             }
     }
 

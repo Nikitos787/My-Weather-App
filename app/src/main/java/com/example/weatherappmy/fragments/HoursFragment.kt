@@ -30,7 +30,7 @@ class HoursFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initRecycleView()
         model.response.observe(viewLifecycleOwner) {
-            adapter.submitList(it.forecast.forecastday[0].hour)
+            adapter.submitList(it?.forecast?.forecastday?.get(0)?.hour)
         }
     }
 

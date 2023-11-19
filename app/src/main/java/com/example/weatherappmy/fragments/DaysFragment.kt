@@ -28,7 +28,7 @@ class DaysFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         init()
         model.response.observe(viewLifecycleOwner) {
-            adapter.submitList(it.forecast.forecastday)
+            adapter.submitList(it?.forecast?.forecastday)
         }
     }
 

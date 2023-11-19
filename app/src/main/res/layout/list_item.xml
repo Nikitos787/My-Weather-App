@@ -20,7 +20,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/baloo_tamma"
-            android:text="Monday 12.12.2022"
+            android:text="@string/test_date_and_time"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -32,7 +32,7 @@
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             android:fontFamily="@font/baloo_tamma"
-            android:text="Sunny"
+            android:text="@string/test_condtion"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/textForDateItem"
             app:layout_constraintTop_toBottomOf="@+id/textForDateItem" />
@@ -52,7 +52,7 @@
             android:layout_height="0dp"
             android:fontFamily="@font/baloo_tamma"
             android:gravity="center"
-            android:text="25ºC"
+            android:text="@string/test_temp"
             android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/imageConditionOfItem"
